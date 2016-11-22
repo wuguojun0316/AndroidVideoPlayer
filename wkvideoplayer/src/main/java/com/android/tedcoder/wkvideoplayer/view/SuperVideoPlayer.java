@@ -427,7 +427,7 @@ public class SuperVideoPlayer extends RelativeLayout {
      *
      * @param isShow isShow
      */
-    private void setCloseButton(boolean isShow) {
+    public void setCloseButton(boolean isShow) {
         mCloseBtnView.setVisibility(isShow ? VISIBLE : INVISIBLE);
     }
 
