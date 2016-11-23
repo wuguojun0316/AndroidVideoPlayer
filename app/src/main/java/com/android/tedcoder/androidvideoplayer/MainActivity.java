@@ -19,13 +19,16 @@ import com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
+{
     private SuperVideoPlayer mSuperVideoPlayer;
     private View mPlayBtnView;
 
-    private SuperVideoPlayer.VideoPlayCallbackImpl mVideoPlayCallback = new SuperVideoPlayer.VideoPlayCallbackImpl() {
+    private SuperVideoPlayer.VideoPlayCallbackImpl mVideoPlayCallback = new SuperVideoPlayer.VideoPlayCallbackImpl()
+    {
         @Override
-        public void onCloseVideo() {
+        public void onCloseVideo()
+        {
             mSuperVideoPlayer.close();
             mPlayBtnView.setVisibility(View.VISIBLE);
             mSuperVideoPlayer.setVisibility(View.GONE);
@@ -33,24 +36,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         @Override
-        public void onSwitchPageType() {
-            if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+        public void onSwitchPageType()
+        {
+            if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+            {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 mSuperVideoPlayer.setPageType(MediaController.PageType.SHRINK);
-            } else {
+            }
+            else
+            {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 mSuperVideoPlayer.setPageType(MediaController.PageType.EXPAND);
             }
         }
 
         @Override
-        public void onPlayFinish() {
+        public void onPlayFinish()
+        {
 
         }
     };
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         mPlayBtnView.setVisibility(View.GONE);
         mSuperVideoPlayer.setVisibility(View.VISIBLE);
         mSuperVideoPlayer.setAutoHideController(false);
@@ -89,7 +98,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         super.onDestroy();
         stopDLNAService();
     }
@@ -100,13 +110,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param newConfig newConfig
      */
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(Configuration newConfig)
+    {
         super.onConfigurationChanged(newConfig);
         if (null == mSuperVideoPlayer) return;
         /***
          * 根据屏幕方向重新设置播放器的大小
          */
-        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getWindow().getDecorView().invalidate();
@@ -114,7 +126,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             float width = DensityUtil.getHeightInPx(this);
             mSuperVideoPlayer.getLayoutParams().height = (int) width;
             mSuperVideoPlayer.getLayoutParams().width = (int) height;
-        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        }
+        else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+        {
             final WindowManager.LayoutParams attrs = getWindow().getAttributes();
             attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getWindow().setAttributes(attrs);
@@ -128,7 +142,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mSuperVideoPlayer = (SuperVideoPlayer) findViewById(R.id.video_player_item_1);
@@ -141,21 +156,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /***
      * 恢复屏幕至竖屏
      */
-    private void resetPageToPortrait() {
+    private void resetPageToPortrait()
+    {
         if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             mSuperVideoPlayer.setPageType(MediaController.PageType.SHRINK);
         }
     }
 
-    private void startDLNAService() {
+    private void startDLNAService()
+    {
         // Clear the device container.
         DLNAContainer.getInstance().clear();
         Intent intent = new Intent(getApplicationContext(), DLNAService.class);
         startService(intent);
     }
 
-    private void stopDLNAService() {
+    private void stopDLNAService()
+    {
         Intent intent = new Intent(getApplicationContext(), DLNAService.class);
         stopService(intent);
     }
