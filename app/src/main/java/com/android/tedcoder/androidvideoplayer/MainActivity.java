@@ -62,32 +62,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         mPlayBtnView.setVisibility(View.GONE);
         mSuperVideoPlayer.setVisibility(View.VISIBLE);
-        mSuperVideoPlayer.setAutoHideController(false);
+        mSuperVideoPlayer.setAutoHideController(true);
+        mSuperVideoPlayer.setCloseButton(false);
 
         Video video = new Video();
         VideoUrl videoUrl1 = new VideoUrl();
         videoUrl1.setFormatName("720P");
-        videoUrl1.setFormatUrl("http://7xkbzx.com1.z0.glb.clouddn.com/SampleVideo_1080x720_20mb.mp4");
+        videoUrl1.setFormatUrl("http://www.jxmth.com/bootstrap/json/firevideo.mp4");
         VideoUrl videoUrl2 = new VideoUrl();
         videoUrl2.setFormatName("480P");
-        videoUrl2.setFormatUrl("http://7xkbzx.com1.z0.glb.clouddn.com/SampleVideo_720x480_20mb.mp4");
+        videoUrl2.setFormatUrl("http://www.jxmth.com/bootstrap/json/firevideo.mp4");
         ArrayList<VideoUrl> arrayList1 = new ArrayList<>();
         arrayList1.add(videoUrl1);
-        arrayList1.add(videoUrl2);
-        video.setVideoName("测试视频一");
+        //arrayList1.add(videoUrl2);
+        video.setVideoName("火灾视频");
         video.setVideoUrl(arrayList1);
 
         Video video2 = new Video();
         VideoUrl videoUrl3 = new VideoUrl();
         videoUrl3.setFormatName("720P");
-        videoUrl3.setFormatUrl("http://7xkbzx.com1.z0.glb.clouddn.com/SampleVideo_1080x720_10mb.mp4");
+        videoUrl3.setFormatUrl("http://www.jxmth.com/bootstrap/json/firevideo.mp4");
         VideoUrl videoUrl4 = new VideoUrl();
         videoUrl4.setFormatName("480P");
-        videoUrl4.setFormatUrl("http://7xkbzx.com1.z0.glb.clouddn.com/SampleVideo_720x480_10mb.mp4");
+        videoUrl4.setFormatUrl("http://www.jxmth.com/bootstrap/json/firevideo.mp4");
         ArrayList<VideoUrl> arrayList2 = new ArrayList<>();
         arrayList2.add(videoUrl3);
         arrayList2.add(videoUrl4);
-        video2.setVideoName("测试视频二");
+        video2.setVideoName("动画火灾");
         video2.setVideoUrl(arrayList2);
 
         ArrayList<Video> videoArrayList = new ArrayList<>();
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         videoArrayList.add(video2);
 
         mSuperVideoPlayer.loadMultipleVideo(videoArrayList,0,0,0);
+
     }
 
     @Override
